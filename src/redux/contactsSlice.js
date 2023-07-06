@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { addContacts } from "./operations";
 
 const contactsSlice = createSlice({
   name:'contacts',
@@ -9,7 +10,7 @@ const contactsSlice = createSlice({
     error: null,
   },
   reducers:{
-    addContact (state, { payload }){
+    addContats (state, { payload }){
     return {
       ...state,
       contacts:[...state.contacts, payload]}

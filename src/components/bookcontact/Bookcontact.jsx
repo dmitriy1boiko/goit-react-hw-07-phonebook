@@ -1,6 +1,8 @@
 // import { addContact } from 'redux/contactsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { nanoid } from 'nanoid';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import { Form, Input, SubButton } from './BookcontactsForm.styles';
 import { useState } from 'react';
 import { addContacts } from 'redux/operations';
 
@@ -26,18 +28,25 @@ export default function Bookcontact() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const id = nanoid();
-    const name = e.target.elements.name.value;
-    const phone = e.target.elements.number.value;
-    const item = contacts.find(
-      contact => contact.name.toLowerCase() === name.toLowerCase()
+    
+    const newContact = {
+      name: name,
+      phone: number,
+    };
+    const isInContacts = contacts.find(
+      contact =>
+        contact.name.toLowerCase() === newContact.name.toLowerCase() ||
+        contact.phone === newContact.phone
     );
-    if (item) {
-      alert(`${name} is alredy in contacts`);
-    } else {
-      dispatch( addContacts({name, phone }));
-      
+    if (isInContacts) {
+      toast.error(
+        `${newContact.name} or ${newContact.phone} has already existed`
+      );
+      return;
     }
+      dispatch( addContacts(newContact));
+      
+    
     setName('');
     setNumber('');
   };
