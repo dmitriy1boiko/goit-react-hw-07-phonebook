@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { selectorLoader } from 'redux/selectors';
 import { LoaderContainer } from './Loader.styled';
 // const selectorLoader = state => state.contacts.isLoading;
- const Loader = ({ children }) => {
+const Loader = ({ children }) => {
   const isLoading = useSelector(selectorLoader);
 
   return (

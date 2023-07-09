@@ -1,19 +1,19 @@
 // import { addContact } from 'redux/contactsSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 // import { Form, Input, SubButton } from './BookcontactsForm.styles';
 import { useEffect, useState } from 'react';
 import { addContacts, getContacts } from 'redux/operations';
-import { selectorContacts, selectorLoader } from 'redux/selectors';
+import { selectorContacts } from 'redux/selectors';
 
 export default function Bookcontact() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
   const contacts = useSelector(selectorContacts);
-  const isLoading = useSelector(selectorLoader)
-  
+ 
+
   const handleChange = e => {
     const { name, value } = e.target;
     switch (name) {
@@ -30,26 +30,28 @@ export default function Bookcontact() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     const newContact = {
       name: name,
       phone: number,
     };
-   
+
     const isInContacts = contacts.find(
       contact =>
         contact.name.toLowerCase() === newContact.name.toLowerCase() ||
         contact.phone === newContact.phone
     );
     if (isInContacts) {
-      toast.error(
+      alert(
         `${newContact.name} or ${newContact.phone} has already existed`
       );
+      setName('');
+    setNumber('');
       return;
     }
-     dispatch(addContacts(newContact));
-     
     
+    dispatch(addContacts(newContact));
+
     setName('');
     setNumber('');
   };

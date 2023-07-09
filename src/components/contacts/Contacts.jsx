@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Wrap, Contact } from './Contacts.styled';
-// import { deleteContacts, deleteContactsApi } from 'redux/operations'; 
+
 import { useEffect } from 'react';
 import { getContacts } from 'redux/operations';
 import { deleteContacts } from 'redux/operations';
@@ -10,7 +10,6 @@ export const Contacts = () => {
   const contacts = useSelector(selectorContacts);
   const filterContacts = useSelector(selectorFilter);
   const dispatch = useDispatch();
-
 
   const handleFilter = () => {
     if (filterContacts === '') return contacts;
@@ -22,10 +21,10 @@ export const Contacts = () => {
   };
 
   const filteredContacts = handleFilter();
-  
-  useEffect(()=>{
-    dispatch(getContacts())
-  },[dispatch])
+
+  useEffect(() => {
+    dispatch(getContacts());
+  }, [dispatch]);
 
   return (
     <ul>

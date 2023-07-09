@@ -34,8 +34,10 @@ const contactsSlice = createSlice({
         state.contacts.items = payload;
       })
       .addCase(deleteContacts.fulfilled, (state, { payload }) => {
-        state.contacts.isLoading= false;
-        state.contacts.items= state.contacts.items.filter(el => el.id !== payload);
+        state.contacts.isLoading = false;
+        state.contacts.items = state.contacts.items.filter(
+          el => el.id !== payload
+        );
       })
       .addMatcher(
         action => action.type.endsWith('pending'),
@@ -72,7 +74,5 @@ const contactsSlice = createSlice({
 //   state.isLoading = false;
 //   state.error = payload;
 // })
-export const {
-  filterContact,
-} = contactsSlice.actions;
+export const { filterContact } = contactsSlice.actions;
 export default contactsSlice.reducer;
