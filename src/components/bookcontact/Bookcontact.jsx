@@ -3,15 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { Form, Input, SubButton } from './BookcontactsForm.styles';
-import { useState } from 'react';
-import { addContacts } from 'redux/operations';
+import { useEffect, useState } from 'react';
+import { addContacts, getContacts } from 'redux/operations';
+import { selectorContacts, selectorLoader } from 'redux/selectors';
 
 export default function Bookcontact() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts);
-
+  const contacts = useSelector(selectorContacts);
+  const isLoading = useSelector(selectorLoader)
+  
   const handleChange = e => {
     const { name, value } = e.target;
     switch (name) {
@@ -33,6 +35,7 @@ export default function Bookcontact() {
       name: name,
       phone: number,
     };
+   
     const isInContacts = contacts.find(
       contact =>
         contact.name.toLowerCase() === newContact.name.toLowerCase() ||
@@ -44,12 +47,17 @@ export default function Bookcontact() {
       );
       return;
     }
-      dispatch( addContacts(newContact));
-      
+     dispatch(addContacts(newContact));
+     
     
     setName('');
     setNumber('');
   };
+
+  useEffect(() => {
+    getContacts();
+  }, []);
+
   return (
     <form onSubmit={handleSubmit}>
       <div>

@@ -2,27 +2,27 @@ import Section from './section/Section';
 import Bookcontact from './bookcontact/Bookcontact';
 import { Container } from './App.styled';
 import { Contacts } from './contacts/Contacts';
-import { useEffect, useState } from 'react';
+ import {  useState } from 'react';
 import {FilterContacts} from './contacts/filter-contacts/FilterContacts'
 import Loader from './Loader/Loader'
-import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from 'redux/operations';
-import {selectorContacts, selectorLoader,selectorError} from '../redux/selectors'
+// import { useDispatch, useSelector } from 'react-redux';
+// import { getContacts } from 'redux/operations';
+// import {selectorContacts, selectorLoader,selectorError} from '../redux/selectors'
 
 export const App = () => {
   // const [contacts, setContakts] = useState(
   //   () => JSON.parse(localStorage.getItem('contacts')) ?? []
   // );
-  const contacts = useSelector(selectorContacts);
-  const isLoading = useSelector(selectorLoader);
-  const error = useSelector(selectorError);
-  const [filter, setFilter] = useState('');
+  // const contacts = useSelector(selectorContacts);
+  // const isLoading = useSelector(selectorLoader);
+  // const error = useSelector(selectorError);
+   const [filter, setFilter] = useState('');
  
-  const dispatch = useDispatch();
-  useEffect(() => {
+  // const dispatch = useDispatch();
+  // useEffect(() => {
     
-     dispatch(getContacts());
-  }, [dispatch]);
+  //    dispatch(getContacts());
+  // }, [dispatch]);
 
   // useEffect(() => {
   //   localStorage.setItem('contacts', JSON.stringify(contacts));
